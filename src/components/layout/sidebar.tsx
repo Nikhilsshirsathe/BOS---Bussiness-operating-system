@@ -145,21 +145,7 @@ export function Sidebar() {
             {collapsed ? <ChevronRight size={16} className="shrink-0" /> : <ChevronLeft size={16} className="shrink-0" />}
             {!collapsed && <span>Collapse</span>}
           </button>
-          {business?.slug && (
-            <Link
-              href={`/b/${business.slug}`}
-              target="_blank"
-              title={collapsed ? "View Public Page" : undefined}
-              className={cn(
-                "flex items-center rounded-[14px] text-[13px] text-muted-foreground",
-                "hover:bg-indigo-50/70 dark:hover:bg-indigo-950/30 hover:text-indigo-600 transition-all duration-200",
-                collapsed ? "justify-center p-2.5" : "gap-3 px-3.5 py-2.5"
-              )}
-            >
-              <ExternalLink size={16} className="shrink-0" />
-              {!collapsed && <span>View Public Page</span>}
-            </Link>
-          )}
+
           <button
             onClick={handleSignOut}
             title={collapsed ? "Sign Out" : undefined}

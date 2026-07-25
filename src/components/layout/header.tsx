@@ -107,18 +107,6 @@ export function DashboardHeader() {
 
         {/* Actions */}
         <div className="flex items-center gap-1 shrink-0">
-          {/* View public page */}
-          {publicUrl && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="hidden lg:flex gap-1.5 h-8 text-xs text-muted-foreground hover:text-indigo-600"
-              onClick={() => window.open(publicUrl, "_blank")}
-            >
-              <ExternalLink size={13} /> View Branch
-            </Button>
-          )}
-
           {/* Theme toggle */}
           {mounted && (
             <button
