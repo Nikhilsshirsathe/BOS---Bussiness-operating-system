@@ -10,7 +10,6 @@ import {
   ExternalLink, Eye, MessageSquare, Phone, Calendar,
   BarChart3, Smartphone, Mail, Globe, RefreshCw,
 } from "lucide-react";
-import { LivePhonePreview } from "@/components/ui/live-phone-preview";
 
 export default function SharePage() {
   const { business, fetchBusiness } = useAppStore();
@@ -86,8 +85,8 @@ export default function SharePage() {
         <p className="text-muted-foreground">Share your AI-powered business page with customers</p>
       </div>
 
-      {/* Two-column layout: tools left, live preview right */}
-      <div className="grid gap-6 xl:grid-cols-[1fr_380px]">
+      {/* Tools */}
+      <div className="space-y-6">
 
         {/* ── Left column ── */}
         <div className="space-y-6">
@@ -261,14 +260,6 @@ export default function SharePage() {
             </CardContent>
           </Card>
         </div>
-
-        {/* ── Right column: Live interactive preview ── */}
-        <LivePhonePreview
-          label="Live Preview"
-          sublabel="— interact with your page"
-          emptyMessage="Set up your business slug in Settings to see your live page here"
-          sticky
-        />
       </div>
     </div>
   );

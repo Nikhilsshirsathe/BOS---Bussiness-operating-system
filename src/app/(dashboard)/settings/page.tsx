@@ -10,7 +10,6 @@ import {
   Globe, Phone, Mail, MapPin, Link as LinkIcon, User,
 } from "lucide-react";
 import { slugify } from "@/lib/utils";
-import { LivePhonePreview } from "@/components/ui/live-phone-preview";
 
 export default function SettingsPage() {
   const { business, fetchBusiness } = useAppStore();
@@ -19,7 +18,6 @@ export default function SettingsPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [previewReloadKey, setPreviewReloadKey] = useState(0);
 
   const [form, setForm] = useState({
     business_name: "",
@@ -129,7 +127,6 @@ export default function SettingsPage() {
     setTimeout(() => setSaved(false), 2000);
     setSaving(false);
     fetchBusiness();
-    setPreviewReloadKey((k) => k + 1);
   };
 
   const addSocialLink = (platform: string) => {
@@ -167,7 +164,7 @@ export default function SettingsPage() {
         </Button>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[1fr_320px]">
+      <div className="space-y-6">
         <div className="space-y-6">
         {/* Business Information */}
         <Card>
@@ -297,7 +294,6 @@ export default function SettingsPage() {
             </div>
           </CardContent>
         </Card>
-      </div>
 
       {/* Feature Toggles */}
       <Card>
@@ -361,17 +357,8 @@ export default function SettingsPage() {
           </div>
         </CardContent>
       </Card>
-        </div>{/* end left column */}
-
-        {/* Live preview */}
-        <LivePhonePreview
-          reloadKey={previewReloadKey}
-          label="Live Preview"
-          sublabel="— updates on save"
-          emptyMessage="Add a slug above and Save All Changes to see your page"
-          sticky
-        />
-      </div>{/* end xl grid */}
+        </div>
+      </div>
     </div>
   );
 }

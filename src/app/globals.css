@@ -2,90 +2,396 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ================================================================
+   BOS — Premium Light Design System
+   "Apple designed Shopify for local businesses"
+   Soft Lavender · Glassmorphism · Neo-Minimalism
+================================================================ */
+
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
+  --color-background:             var(--background);
+  --color-foreground:             var(--foreground);
+  --color-primary:                var(--primary);
+  --color-primary-foreground:     var(--primary-foreground);
+  --color-secondary:              var(--secondary);
+  --color-secondary-foreground:   var(--secondary-foreground);
+  --color-accent:                 var(--accent);
+  --color-accent-foreground:      var(--accent-foreground);
+  --color-destructive:            var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --radius: 0.5rem;
+  --color-muted:                  var(--muted);
+  --color-muted-foreground:       var(--muted-foreground);
+  --color-card:                   var(--card);
+  --color-card-foreground:        var(--card-foreground);
+  --color-border:                 var(--border);
+  --color-input:                  var(--input);
+  --color-ring:                   var(--ring);
+  --color-sidebar:                var(--sidebar);
+  --color-sidebar-foreground:     var(--sidebar-foreground);
+
+  /* ── BOS Brand palette ── */
+  --color-bos-indigo:  #6C63FF;
+  --color-bos-violet:  #7B61FF;
+  --color-bos-blue:    #4F7CFF;
+  --color-bos-sky:     #5D5FEF;
+  --color-bos-cyan:    #00C2FF;
+  --color-bos-teal:    #00D9A6;
+  --color-bos-peach:   #FF9F43;
+  --color-bos-rose:    #FF6CAB;
+  --color-bos-purple:  #8B5CF6;
+
+  /* ── Typography ── */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* ── Radius tokens ── */
+  --radius:       1rem;
+  --radius-sm:    0.75rem;
+  --radius-card:  1.75rem;   /* 28px cards */
+  --radius-xl:    2rem;      /* 32px sidebar */
+  --radius-btn:   1.125rem;  /* 18px buttons */
+  --radius-input: 1rem;      /* 16px inputs */
+  --radius-chart: 1.5rem;    /* 24px charts */
 }
 
+/* ================================================================
+   LIGHT THEME — Soft Lavender Premium
+================================================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #1e293b;
-  --accent: #e2e8f0;
-  --accent-foreground: #1e293b;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #6366f1;
-  --sidebar: #f8fafc;
-  --sidebar-foreground: #0f172a;
+  --background:           #F5F7FF;
+  --foreground:           #1A1A2E;
+  --primary:              #6C63FF;
+  --primary-foreground:   #FFFFFF;
+  --secondary:            #EEF2FF;
+  --secondary-foreground: #3730A3;
+  --accent:               #F0EEFF;
+  --accent-foreground:    #4C46B8;
+  --destructive:          #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --muted:                #EEF2FF;
+  --muted-foreground:     #6B7280;
+  --card:                 #FFFFFF;
+  --card-foreground:      #1A1A2E;
+  --border:               rgba(108,99,255,0.10);
+  --input:                #F8F6FF;
+  --ring:                 #6C63FF;
+  --sidebar:              #FFFFFF;
+  --sidebar-foreground:   #1A1A2E;
 }
 
+/* ================================================================
+   DARK THEME — Deep Indigo
+================================================================ */
 .dark {
-  --background: #0f172a;
-  --foreground: #f8fafc;
-  --primary: #818cf8;
-  --primary-foreground: #0f172a;
-  --secondary: #1e293b;
-  --secondary-foreground: #f8fafc;
-  --accent: #334155;
-  --accent-foreground: #f8fafc;
-  --destructive: #7f1d1d;
-  --destructive-foreground: #f8fafc;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --card: #1e293b;
-  --card-foreground: #f8fafc;
-  --border: #334155;
-  --input: #334155;
-  --ring: #818cf8;
-  --sidebar: #1e293b;
-  --sidebar-foreground: #f8fafc;
+  --background:           #0C0E1A;
+  --foreground:           #F1F0FF;
+  --primary:              #7B61FF;
+  --primary-foreground:   #FFFFFF;
+  --secondary:            #13152A;
+  --secondary-foreground: #C4C1FF;
+  --accent:               #1C1F38;
+  --accent-foreground:    #C4C1FF;
+  --destructive:          #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --muted:                #13152A;
+  --muted-foreground:     #8B8FA8;
+  --card:                 #13152A;
+  --card-foreground:      #F1F0FF;
+  --border:               rgba(123,97,255,0.12);
+  --input:                #1C1F38;
+  --ring:                 #7B61FF;
+  --sidebar:              #0E1020;
+  --sidebar-foreground:   #F1F0FF;
 }
 
-* {
+/* ================================================================
+   RESET & BASE
+================================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
   border-color: var(--border);
+}
+
+html {
+  -webkit-font-smoothing:  antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering:          optimizeLegibility;
+  scroll-behavior:         smooth;
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color:      var(--foreground);
+  font-family: var(--font-sans);
+  font-size:  15px;
+  line-height: 1.65;
+  min-height: 100dvh;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+/* ================================================================
+   SCROLLBAR
+================================================================ */
+::-webkit-scrollbar            { width: 5px; height: 5px; }
+::-webkit-scrollbar-track      { background: transparent; }
+::-webkit-scrollbar-thumb      { background: rgba(108,99,255,0.2); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover{ background: rgba(108,99,255,0.4); }
+.dark ::-webkit-scrollbar-thumb       { background: rgba(123,97,255,0.2); }
+.dark ::-webkit-scrollbar-thumb:hover { background: rgba(123,97,255,0.4); }
+
+/* ================================================================
+   SELECTION
+================================================================ */
+::selection      { background: rgba(108,99,255,0.15); }
+.dark ::selection{ background: rgba(123,97,255,0.25); }
+
+/* ================================================================
+   FOCUS
+================================================================ */
+:focus-visible {
+  outline:        2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius:  6px;
+}
+
+/* ================================================================
+   GLASS MORPHISM
+================================================================ */
+
+/* Soft white glass — light mode cards */
+.glass {
+  background:             rgba(255,255,255,0.70);
+  backdrop-filter:        blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:                 1px solid rgba(255,255,255,0.80);
+}
+.dark .glass {
+  background:             rgba(19,21,42,0.75);
+  border:                 1px solid rgba(123,97,255,0.12);
+}
+
+/* Premium card glass */
+.glass-card {
+  background:             rgba(255,255,255,0.85);
+  backdrop-filter:        blur(32px) saturate(200%);
+  -webkit-backdrop-filter:blur(32px) saturate(200%);
+  border:                 1px solid rgba(255,255,255,0.90);
+  box-shadow:
+    0 2px  12px rgba(108,99,255,0.06),
+    0 8px  32px rgba(108,99,255,0.04),
+    0 1px   2px rgba(0,0,0,0.03);
+}
+.dark .glass-card {
+  background: rgba(19,21,42,0.85);
+  border:     1px solid rgba(123,97,255,0.10);
+  box-shadow:
+    0 2px  12px rgba(0,0,0,0.30),
+    0 8px  32px rgba(0,0,0,0.20);
+}
+
+/* Sidebar glass — extra frosted */
+.glass-sidebar {
+  background:             rgba(255,255,255,0.78);
+  backdrop-filter:        blur(40px) saturate(220%);
+  -webkit-backdrop-filter:blur(40px) saturate(220%);
+  border:                 1px solid rgba(255,255,255,0.95);
+  box-shadow:
+    0 4px  24px rgba(108,99,255,0.08),
+    0 16px 48px rgba(108,99,255,0.04);
+}
+.dark .glass-sidebar {
+  background: rgba(14,16,32,0.88);
+  border:     1px solid rgba(123,97,255,0.10);
+  box-shadow:
+    0 4px  24px rgba(0,0,0,0.40),
+    0 16px 48px rgba(0,0,0,0.25);
+}
+
+/* ================================================================
+   BOS GRADIENTS
+================================================================ */
+
+/* Primary brand gradient */
+.bos-gradient {
+  background: linear-gradient(135deg, #6C63FF 0%, #7B61FF 50%, #8B5CF6 100%);
+}
+
+/* Softer version for cards */
+.bos-gradient-soft {
+  background: linear-gradient(135deg,
+    rgba(108,99,255,0.10) 0%,
+    rgba(139,92,246,0.08) 100%);
+}
+
+/* Full spectrum gradient */
+.bos-gradient-full {
+  background: linear-gradient(135deg,
+    #6C63FF 0%, #7B61FF 30%, #4F7CFF 60%, #00C2FF 100%);
+}
+
+/* Gradient text */
+.bos-gradient-text {
+  background: linear-gradient(135deg, #6C63FF 0%, #7B61FF 45%, #4F7CFF 80%, #00C2FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pastel section gradients */
+.gradient-lavender { background: linear-gradient(135deg, #F5F7FF 0%, #EEF2FF 100%); }
+.gradient-sky      { background: linear-gradient(135deg, #F0F7FF 0%, #E0F2FE 100%); }
+.gradient-peach    { background: linear-gradient(135deg, #FFF7F0 0%, #FFE4CC 100%); }
+.gradient-mint     { background: linear-gradient(135deg, #F0FFFA 0%, #CCFBEF 100%); }
+.gradient-rose     { background: linear-gradient(135deg, #FFF0F6 0%, #FFD6E8 100%); }
+
+/* ================================================================
+   CARD TINTS (light soft backgrounds)
+================================================================ */
+.card-purple { background: linear-gradient(135deg, rgba(108,99,255,0.06), rgba(139,92,246,0.04)); }
+.card-blue   { background: linear-gradient(135deg, rgba(79,124,255,0.06), rgba(0,194,255,0.04)); }
+.card-teal   { background: linear-gradient(135deg, rgba(0,217,166,0.07), rgba(0,194,255,0.04)); }
+.card-peach  { background: linear-gradient(135deg, rgba(255,159,67,0.08), rgba(255,108,171,0.05)); }
+.card-rose   { background: linear-gradient(135deg, rgba(255,108,171,0.07), rgba(139,92,246,0.05)); }
+
+/* ================================================================
+   SHADOWS
+================================================================ */
+.shadow-bos-sm {
+  box-shadow:
+    0 1px  3px rgba(108,99,255,0.08),
+    0 4px 12px rgba(108,99,255,0.06);
+}
+.shadow-bos {
+  box-shadow:
+    0 2px  8px  rgba(108,99,255,0.08),
+    0 8px  24px rgba(108,99,255,0.08),
+    0 1px  2px  rgba(0,0,0,0.04);
+}
+.shadow-bos-lg {
+  box-shadow:
+    0 4px  16px rgba(108,99,255,0.12),
+    0 16px 48px rgba(108,99,255,0.08),
+    0 2px   4px rgba(0,0,0,0.04);
+}
+
+/* ================================================================
+   ANIMATIONS
+================================================================ */
+
+/* Blob float */
+@keyframes blob-float {
+  0%,100% { transform: translate(0,    0)    scale(1);    }
+  33%     { transform: translate(28px,-18px) scale(1.04); }
+  66%     { transform: translate(-18px,10px) scale(0.97); }
+}
+.blob {
+  animation: blob-float 9s ease-in-out infinite;
+  filter:    blur(70px);
+  opacity:   0.45;
+  will-change: transform;
+}
+.blob-2 { animation-delay: -3.5s; }
+.blob-3 { animation-delay: -6s;   }
+
+/* Fade up stagger */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.fade-up   { animation: fade-up 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+.fade-up-1 { animation-delay: 0.05s; }
+.fade-up-2 { animation-delay: 0.10s; }
+.fade-up-3 { animation-delay: 0.15s; }
+.fade-up-4 { animation-delay: 0.20s; }
+.fade-up-5 { animation-delay: 0.25s; }
+.fade-up-6 { animation-delay: 0.30s; }
+
+/* Scale in */
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+.scale-in { animation: scale-in 0.4s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%,100% { box-shadow: 0 0 0   0 rgba(108,99,255,0.2); }
+  50%     { box-shadow: 0 0 20px 6px rgba(108,99,255,0.3); }
+}
+.pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+
+/* Shimmer skeleton */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(108,99,255,0.05) 25%,
+    rgba(108,99,255,0.12) 50%,
+    rgba(108,99,255,0.05) 75%
+  );
+  background-size: 1200px 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+/* ================================================================
+   INTERACTIVE STATES
+================================================================ */
+
+/* Card lift on hover */
+.hover-lift {
+  transition: transform 280ms cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 280ms ease;
+}
+.hover-lift:hover {
+  transform:  translateY(-4px) scale(1.005);
+  box-shadow:
+    0 8px  24px rgba(108,99,255,0.14),
+    0 24px 48px rgba(108,99,255,0.08);
+}
+.dark .hover-lift:hover {
+  box-shadow:
+    0 8px  24px rgba(123,97,255,0.20),
+    0 24px 48px rgba(0,0,0,0.35);
+}
+
+/* Interactive press */
+.interactive {
+  transition: transform 220ms ease, opacity 220ms ease;
+  cursor: pointer;
+}
+.interactive:hover  { transform: scale(1.025); }
+.interactive:active { transform: scale(0.975); opacity: 0.88; }
+
+/* ================================================================
+   UTILITIES
+================================================================ */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* Glow tints */
+.glow-indigo { box-shadow: 0 0 28px rgba(108,99,255,0.30), 0 4px 16px rgba(108,99,255,0.18); }
+.glow-blue   { box-shadow: 0 0 28px rgba(79,124,255,0.30),  0 4px 16px rgba(79,124,255,0.18); }
+.glow-teal   { box-shadow: 0 0 28px rgba(0,217,166,0.28),   0 4px 16px rgba(0,217,166,0.16); }
+
+/* Dot pattern bg */
+.dot-bg {
+  background-image: radial-gradient(circle, rgba(108,99,255,0.10) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Input/form base */
+input, textarea, select { font-family: var(--font-sans); }
+
+/* ================================================================
+   SIDEBAR LAYOUT TOKENS
+================================================================ */
+:root {
+  --sidebar-w:           264px;
+  --sidebar-w-collapsed:  72px;
 }

@@ -24,44 +24,48 @@ export async function middleware(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   const { pathname } = request.nextUrl;
 
-  // ── Public routes (no auth required) ──────────────────────────
-  const publicRoutes = [
-    "/",
-    "/login",
-    "/signup",
-    "/register",
-    "/auth/callback",
-  ];
-
+  // ── Public routes ──────────────────────────────────────────────
+  const publicRoutes = ["/", "/login", "/signup", "/register", "/auth/callback", "/user-login", "/user-signup"];
   const isPublicRoute = publicRoutes.includes(pathname);
-  const isPublicPage  = pathname.startsWith("/b/");       // /b/[slug]
+  const isPublicPage  = pathname.startsWith("/b/");
   const isAPIRoute    = pathname.startsWith("/api/");
   const isAsset       = pathname.startsWith("/_next/") || pathname.startsWith("/favicon");
 
-  // Allow public pages and APIs without auth
-  if (isPublicPage || isAPIRoute || isAsset || isPublicRoute) {
-    return supabaseResponse;
+  if (isPublicPage || isAPIRoute || isAsset) return supabaseResponse;
+
+  // ── Auth pages: redirect logged-in users by role ───────────────
+  const isAuthPage = ["/login", "/signup", "/user-login", "/user-signup", "/register"].includes(pathname);
+
+  if (user && isAuthPage) {
+    const role = user.user_metadata?.role ?? "business";
+    const url  = request.nextUrl.clone();
+    url.pathname = role === "user" ? "/explore" : "/dashboard";
+    return NextResponse.redirect(url);
   }
 
-  // ── Dashboard routes require auth ─────────────────────────────
-  const protectedPrefixes = [
+  if (isPublicRoute) return supabaseResponse;
+
+  // ── Protected: dashboard routes (business owners only) ─────────
+  const dashboardPrefixes = [
     "/dashboard", "/chatbot", "/voice-agent", "/appointment",
     "/knowledge", "/share", "/settings", "/onboarding",
+    "/analytics", "/conversations", "/voice-calls", "/appointments",
+    "/leads", "/services", "/ai-settings", "/qr-code", "/agents",
+    "/profile-setup",
   ];
+  const needsDashboard = dashboardPrefixes.some((p) => pathname.startsWith(p));
 
-  const needsAuth = protectedPrefixes.some((p) => pathname.startsWith(p));
-
-  if (needsAuth && !user) {
+  if (needsDashboard && !user) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("next", pathname);
     return NextResponse.redirect(url);
   }
 
-  // Redirect authenticated users away from auth pages
-  if (user && (pathname === "/login" || pathname === "/signup" || pathname === "/register")) {
+  // ── Protected: explore (users) ─────────────────────────────────
+  if (pathname.startsWith("/explore") && !user) {
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
+    url.pathname = "/user-login";
     return NextResponse.redirect(url);
   }
 

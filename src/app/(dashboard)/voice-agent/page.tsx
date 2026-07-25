@@ -5,7 +5,6 @@ import { useAppStore } from "@/lib/store";
 import { createClient } from "@/lib/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { LivePhonePreview } from "@/components/ui/live-phone-preview";
 import {
   Phone, Mic, Volume2, Settings, Loader2, Save, Check,
   Headphones, Bot,
@@ -19,7 +18,6 @@ export default function VoiceAgentPage() {
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
   const [calls, setCalls] = useState<any[]>([]);
-  const [previewReloadKey, setPreviewReloadKey] = useState(0);
 
   const [form, setForm] = useState({
     voice_enabled: true,
@@ -69,7 +67,6 @@ export default function VoiceAgentPage() {
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
     setSaving(false);
-    setPreviewReloadKey((k) => k + 1);
   };
 
   if (loading) {
@@ -93,8 +90,8 @@ export default function VoiceAgentPage() {
         </Button>
       </div>
 
-      {/* Config + live preview */}
-      <div className="grid gap-6 xl:grid-cols-[1fr_320px]">
+      {/* Config */}
+      <div className="space-y-6">
         <div className="space-y-6">
           <div className="grid gap-6 lg:grid-cols-2">
             {/* Voice Configuration */}
@@ -262,15 +259,6 @@ export default function VoiceAgentPage() {
             </CardContent>
           </Card>
         </div>
-
-        {/* Live preview */}
-        <LivePhonePreview
-          reloadKey={previewReloadKey}
-          label="Live Preview"
-          sublabel="— try the voice agent"
-          emptyMessage="Set up your business slug in Settings to preview"
-          sticky
-        />
       </div>
     </div>
   );

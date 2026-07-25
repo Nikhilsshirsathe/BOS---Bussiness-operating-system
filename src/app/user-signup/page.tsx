@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Bot, Eye, EyeOff, Loader2, Check, Users } from "lucide-react";
+import { Eye, EyeOff, Loader2, Check, Store } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 
-export default function SignupPage() {
+export default function UserSignupPage() {
   const router = useRouter();
-  const [bizName,  setBizName]  = useState("");
+  const [fullName, setFullName] = useState("");
   const [email,    setEmail]    = useState("");
   const [password, setPassword] = useState("");
   const [showPw,   setShowPw]   = useState(false);
@@ -28,30 +28,22 @@ export default function SignupPage() {
       email,
       password,
       options: {
-        data: { business_name: bizName, role: "business" },
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        data: { full_name: fullName, role: "user" },
+        emailRedirectTo: `${window.location.origin}/auth/callback?role=user`,
       },
     });
 
     if (authErr) { setError(authErr.message); setLoading(false); return; }
 
     if (data.session) {
-      // Email confirmation disabled — user is immediately active
-      const slug = bizName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-      await supabase.from("businesses").insert({
-        owner_id: data.user!.id,
-        business_name: bizName,
-        slug,
-        industry: "Other",
-      });
-      // Upsert profile with business role
+      // Upsert user profile
       await supabase.from("user_profiles").upsert({
         id: data.user!.id,
         email,
-        full_name: bizName,
-        role: "business",
+        full_name: fullName,
+        role: "user",
       });
-      router.push("/profile-setup");
+      router.push("/explore");
       router.refresh();
       return;
     }
@@ -62,17 +54,17 @@ export default function SignupPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-violet-50 via-background to-violet-100/30 p-4">
         <div className="w-full max-w-md bg-card border rounded-2xl shadow-xl p-8 text-center space-y-4">
-          <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-950 flex items-center justify-center mx-auto">
-            <Check size={32} className="text-green-600" />
+          <div className="w-16 h-16 rounded-full bg-violet-100 dark:bg-violet-950 flex items-center justify-center mx-auto">
+            <Check size={32} className="text-violet-600" />
           </div>
           <h2 className="text-2xl font-bold">Check your email</h2>
           <p className="text-muted-foreground text-sm">
             We sent a confirmation link to <strong>{email}</strong>.
-            Click it to activate your account, then sign in.
+            Click it to activate your account.
           </p>
-          <Link href="/login">
+          <Link href="/user-login">
             <Button variant="outline" className="w-full mt-2">Go to Sign In</Button>
           </Link>
         </div>
@@ -81,16 +73,16 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-violet-50 via-background to-violet-100/30 dark:from-violet-950/20 dark:via-background dark:to-violet-900/10 p-4">
       <div className="w-full max-w-md">
         <div className="bg-card border rounded-2xl shadow-xl overflow-hidden">
           {/* Header */}
-          <div className="bg-primary px-6 py-8 text-center text-primary-foreground">
+          <div className="bg-violet-600 px-6 py-8 text-center text-white">
             <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mx-auto mb-3">
-              <Bot size={28} />
+              <Store size={28} />
             </div>
-            <h1 className="text-2xl font-bold">Create Your AI Business Page</h1>
-            <p className="text-primary-foreground/80 text-sm mt-1">Deploy your AI receptionist in minutes</p>
+            <h1 className="text-2xl font-bold">Join as a Customer</h1>
+            <p className="text-white/80 text-sm mt-1">Discover and connect with local AI-powered businesses</p>
           </div>
 
           <div className="p-6 space-y-4">
@@ -101,19 +93,19 @@ export default function SignupPage() {
             )}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Business Name</label>
+                <label className="block text-sm font-medium mb-1">Full Name</label>
                 <input
-                  type="text" value={bizName} onChange={(e) => setBizName(e.target.value)}
-                  className="w-full px-4 py-2.5 border rounded-xl bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="SmileCare Dental" required
+                  type="text" value={fullName} onChange={(e) => setFullName(e.target.value)}
+                  className="w-full px-4 py-2.5 border rounded-xl bg-background text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  placeholder="Your Name" required
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">Email</label>
                 <input
                   type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2.5 border rounded-xl bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="you@company.com" required autoComplete="email"
+                  className="w-full px-4 py-2.5 border rounded-xl bg-background text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  placeholder="you@email.com" required autoComplete="email"
                 />
               </div>
               <div>
@@ -121,7 +113,7 @@ export default function SignupPage() {
                 <div className="relative">
                   <input
                     type={showPw ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-2.5 pr-11 border rounded-xl bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full px-4 py-2.5 pr-11 border rounded-xl bg-background text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                     placeholder="Min. 6 characters" required autoComplete="new-password"
                   />
                   <button type="button" onClick={() => setShowPw(!showPw)}
@@ -130,8 +122,8 @@ export default function SignupPage() {
                   </button>
                 </div>
               </div>
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? <><Loader2 size={16} className="mr-2 animate-spin" />Creating account…</> : "Create Business Account →"}
+              <Button type="submit" className="w-full bg-violet-600 hover:bg-violet-700 text-white" disabled={loading}>
+                {loading ? <><Loader2 size={16} className="mr-2 animate-spin" />Creating account…</> : "Create Account & Explore →"}
               </Button>
               <p className="text-xs text-center text-muted-foreground">
                 By signing up you agree to our Terms of Service.
@@ -139,16 +131,15 @@ export default function SignupPage() {
             </form>
             <p className="text-center text-sm text-muted-foreground">
               Already have an account?{" "}
-              <Link href="/login" className="text-primary hover:underline font-medium">Sign in</Link>
+              <Link href="/user-login" className="text-violet-600 hover:underline font-medium">Sign in</Link>
             </p>
 
-            {/* Switch to user signup */}
+            {/* Switch to business signup */}
             <div className="border-t pt-4">
-              <p className="text-center text-xs text-muted-foreground mb-2">Looking to browse businesses?</p>
-              <Link href="/user-signup">
+              <p className="text-center text-xs text-muted-foreground mb-2">Have a business?</p>
+              <Link href="/signup">
                 <Button variant="outline" className="w-full gap-2">
-                  <Users size={16} />
-                  Sign Up as Customer
+                  Create Business Account →
                 </Button>
               </Link>
             </div>

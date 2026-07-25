@@ -5,8 +5,6 @@ import { useAppStore } from "@/lib/store";
 import { createClient } from "@/lib/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { LivePhonePreview } from "@/components/ui/live-phone-preview";
-import { formatDate, formatTime, daysOfWeek, timeOptions } from "@/lib/utils";
 import {
   Calendar, Clock, Plus, Loader2, Check, X, Save,
 } from "lucide-react";
@@ -43,8 +41,6 @@ export default function AppointmentPage() {
   const [hours, setHours] = useState<BusinessHour[]>([]);
   const [showAddAppt, setShowAddAppt] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
-  const [previewReloadKey, setPreviewReloadKey] = useState(0);
-
   const [newAppt, setNewAppt] = useState({
     customer_name: "", customer_email: "", customer_phone: "",
     appointment_time: "", service: "", duration_minutes: 30,
@@ -102,7 +98,6 @@ export default function AppointmentPage() {
       });
     }
     setSaving(false);
-    setPreviewReloadKey((k) => k + 1);
   };
 
   const addAppointment = async () => {
@@ -141,6 +136,36 @@ export default function AppointmentPage() {
     );
   }
 
+  const daysOfWeek = () => [
+    { value: 0, label: "Sunday" },
+    { value: 1, label: "Monday" },
+    { value: 2, label: "Tuesday" },
+    { value: 3, label: "Wednesday" },
+    { value: 4, label: "Thursday" },
+    { value: 5, label: "Friday" },
+    { value: 6, label: "Saturday" },
+  ];
+
+  const timeOptions = () => {
+    const times: string[] = [];
+    for (let h = 0; h < 24; h++) {
+      for (let m = 0; m < 60; m += 30) {
+        times.push(`${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`);
+      }
+    }
+    return times;
+  };
+
+  const formatTime = (iso: string) => {
+    const d = new Date(iso);
+    return d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
+  };
+
+  const formatDate = (iso: string) => {
+    const d = new Date(iso);
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  };
+
   const days = daysOfWeek();
   const times = timeOptions();
 
@@ -156,8 +181,8 @@ export default function AppointmentPage() {
         </Button>
       </div>
 
-      {/* Main layout: content left, live preview right */}
-      <div className="grid gap-6 xl:grid-cols-[1fr_320px]">
+      {/* Main layout */}
+      <div className="space-y-6">
         <div className="space-y-6">
 
           <div className="grid gap-6 lg:grid-cols-3">
@@ -374,15 +399,6 @@ export default function AppointmentPage() {
             </CardContent>
           </Card>
         </div>
-
-        {/* Live preview */}
-        <LivePhonePreview
-          reloadKey={previewReloadKey}
-          label="Live Preview"
-          sublabel="— try booking"
-          emptyMessage="Set up your business slug in Settings to preview"
-          sticky
-        />
       </div>
 
       {/* Add Appointment Modal */}

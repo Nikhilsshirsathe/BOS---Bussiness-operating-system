@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bot, Phone, Calendar, QrCode, Sparkles, Zap, Shield, BarChart3, Globe } from "lucide-react";
+import { Bot, Phone, Calendar, QrCode, Sparkles, Zap, Shield, BarChart3, Globe, Store, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function LandingPage() {
@@ -9,46 +9,65 @@ export default function LandingPage() {
       <header className="border-b sticky top-0 z-50 backdrop-blur bg-background/80">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2 font-bold text-xl">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Bot size={18} />
+            <div className="flex h-8 w-8 items-center justify-center rounded-[10px] bos-gradient shadow-md shadow-blue-500/25">
+              <Zap size={16} className="text-white" />
             </div>
-            AgentOS
+            <span className="bos-gradient-text">BOS</span>
           </div>
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-4">
             <Link href="#features" className="text-sm text-muted-foreground hover:text-foreground">Features</Link>
             <Link href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground">How it works</Link>
-            <Link href="/login"><Button variant="ghost" size="sm">Sign In</Button></Link>
+            <Link href="/user-login">
+              <Button variant="ghost" size="sm" className="gap-1.5">
+                <Store size={14} /> Browse Businesses
+              </Button>
+            </Link>
+            <Link href="/login">
+              <Button variant="outline" size="sm" className="gap-1.5">
+                <Building2 size={14} /> Business Login
+              </Button>
+            </Link>
             <Link href="/signup"><Button size="sm">Get Started Free</Button></Link>
           </nav>
           <div className="flex md:hidden gap-2">
-            <Link href="/login"><Button variant="ghost" size="sm">Login</Button></Link>
+            <Link href="/user-login"><Button variant="ghost" size="sm">Explore</Button></Link>
+            <Link href="/login"><Button variant="outline" size="sm">Business</Button></Link>
             <Link href="/signup"><Button size="sm">Sign Up</Button></Link>
           </div>
         </div>
       </header>
 
       {/* ── Hero ── */}
-      <section className="container mx-auto px-4 py-20 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm mb-8 bg-primary/5">
-          <Sparkles size={14} className="text-primary" />
-          <span>AI Receptionist + Booking + Voice — for any business</span>
+      <section className="container mx-auto px-4 py-24 text-center relative overflow-hidden">
+        {/* Blobs */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="blob absolute -top-20 left-1/4 w-72 h-72 rounded-full bg-blue-500 opacity-15 dark:opacity-20" />
+          <div className="blob blob-2 absolute top-10 right-1/4 w-64 h-64 rounded-full bg-purple-500 opacity-10 dark:opacity-15" />
         </div>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-          Your Business Gets Its Own{" "}
-          <span className="text-primary">AI-Powered Page</span>
+
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 px-4 py-1.5 text-sm mb-8 bg-primary/5 dark:bg-primary/10">
+          <Sparkles size={14} className="text-primary" />
+          <span>AI Assistant · Appointments · Voice · Analytics</span>
+        </div>
+
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-[1.1]">
+          Your Business&apos;s{" "}
+          <span className="bos-gradient-text">Digital Branch.</span>
         </h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-          Give every customer an intelligent AI receptionist that chats, speaks, answers questions, and books appointments — 24/7. Share it with a link, QR code, or embed it on your website.
+
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+          BOS is an AI-powered Business Operating System. Build your digital identity, manage operations, deploy an AI assistant, and share it with anyone — in under 5 minutes.
         </p>
-        <div className="flex gap-4 justify-center flex-wrap">
+
+        <div className="flex gap-3 justify-center flex-wrap">
           <Link href="/signup">
-            <Button size="lg" className="gap-2 px-8">
-              Create Your AI Page <Zap size={16} />
+            <Button variant="glow" size="xl" className="gap-2">
+              <Building2 size={16} /> Build My Digital Branch
             </Button>
           </Link>
-          <Link href="/b/demo">
-            <Button size="lg" variant="outline" className="gap-2">
-              See Live Demo <Globe size={16} />
+          <Link href="/user-signup">
+            <Button size="xl" variant="outline" className="gap-2">
+              <Store size={16} /> Browse Businesses
             </Button>
           </Link>
         </div>
