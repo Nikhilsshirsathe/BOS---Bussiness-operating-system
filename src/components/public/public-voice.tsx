@@ -19,21 +19,10 @@ interface ISpeechRecognition {
   start: () => void;
   stop: () => void;
 }
-interface ISpeechSynthesisUtterance {
-  rate: number;
-  pitch: number;
-  onend: (() => void) | null;
-  onerror: (() => void) | null;
-}
-interface ISpeechSynthesis {
-  cancel: () => void;
-  speak: (u: ISpeechSynthesisUtterance) => void;
-}
 declare global {
   interface Window {
     SpeechRecognition: new () => ISpeechRecognition;
     webkitSpeechRecognition: new () => ISpeechRecognition;
-    SpeechSynthesisUtterance: new (text: string) => ISpeechSynthesisUtterance;
   }
 }
 
@@ -63,7 +52,7 @@ export default function PublicVoice({ business, brand, onBack }: Props) {
   const [error, setError] = useState<string | null>(null);
 
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
-  const synthRef = useRef<ISpeechSynthesis | null>(null);
+  const synthRef = useRef<SpeechSynthesis | null>(null);
   const callStartedRef = useRef(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
