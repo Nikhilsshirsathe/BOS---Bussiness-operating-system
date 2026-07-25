@@ -130,7 +130,7 @@ export async function POST(req: NextRequest) {
       agent_type: result.agent,
       chat_id: chatId,
       visitor_id,
-    }).then().catch(() => {});
+    }).then(() => {}).catch(() => {});
 
     return NextResponse.json({
       message: result.response,
