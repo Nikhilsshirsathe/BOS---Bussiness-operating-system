@@ -34,7 +34,6 @@ declare global {
     SpeechRecognition: new () => ISpeechRecognition;
     webkitSpeechRecognition: new () => ISpeechRecognition;
     SpeechSynthesisUtterance: new (text: string) => ISpeechSynthesisUtterance;
-    readonly speechSynthesis: ISpeechSynthesis;
   }
 }
 
