@@ -110,11 +110,11 @@ export default function PublicBusinessPage() {
       if (hoursRes.data) setHours(hoursRes.data);
 
       // Log page visit (best effort)
-      supabase.from("sharing_analytics").insert({
+      void supabase.from("analytics_events").insert({
         business_id: biz.id,
-        event_type: "page_visit",
+        event_type: "page_view",
         visitor_id: visitorId,
-      }).then();
+      });
 
       setLoading(false);
     };
@@ -126,6 +126,12 @@ export default function PublicBusinessPage() {
     setShowChat(true);
     if (chatMessages.length === 0) {
       setChatMessages([{ role: "assistant", content: brand.greeting_message }]);
+      // Track chat start
+      void supabase.from("analytics_events").insert({
+        business_id: business.id,
+        event_type: "chat_start",
+        visitor_id: visitorId,
+      });
     }
   };
 
