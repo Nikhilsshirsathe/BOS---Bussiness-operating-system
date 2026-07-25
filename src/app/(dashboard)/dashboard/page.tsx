@@ -122,6 +122,39 @@ export default function DashboardPage() {
   return (
     <div className="p-6 pb-12 max-w-7xl mx-auto space-y-8">
 
+      {/* ── Live Page Banner ─────────────────────────────────── */}
+      {business?.slug && (
+        <div className="rounded-[20px] border border-primary/30 bg-primary/5 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+          <div className="flex items-center gap-3 flex-1 min-w-0">
+            <div className="w-9 h-9 rounded-[12px] bg-primary flex items-center justify-center shrink-0">
+              <Zap size={16} className="text-white" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-primary">🎉 Your AI business page is live!</p>
+              <p className="text-xs text-muted-foreground truncate font-mono">
+                {typeof window !== "undefined" ? window.location.origin : ""}/b/{business.slug}
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-2 shrink-0">
+            <a
+              href={`/b/${business.slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+            >
+              <ExternalLink size={12} /> View Page
+            </a>
+            <Link
+              href="/share"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-primary/40 text-primary text-xs font-medium hover:bg-primary/10 transition-colors"
+            >
+              <QrCode size={12} /> QR Code
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* ── KPI Widgets ──────────────────────────────────────── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {kpis.map(({ label, value, icon: Icon, from, to, trend, trendUp, badge }, i) => (

@@ -20,8 +20,8 @@ export default function SharePage() {
   const [analytics, setAnalytics] = useState<any>(null);
 
   const publicUrl =
-    typeof window !== "undefined" && business?.slug
-      ? `${window.location.origin}/b/${business.slug}`
+    business?.slug
+      ? `${process.env.NEXT_PUBLIC_APP_URL ?? (typeof window !== "undefined" ? window.location.origin : "")}/b/${business.slug}`
       : null;
 
   useEffect(() => {
