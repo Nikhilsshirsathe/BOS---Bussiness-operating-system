@@ -7,7 +7,7 @@ import {
   LayoutDashboard, MessageSquare, Phone, Calendar,
   BookOpen, Share2, Settings, LogOut, ExternalLink,
   ChevronLeft, ChevronRight, Users,
-  Zap, Crown, Smartphone,
+  Zap, Smartphone,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAppStore } from "@/lib/store";
@@ -128,25 +128,6 @@ export function Sidebar() {
             );
           })}
         </nav>
-
-        {/* ── Upgrade card ──────────────────────────────────────── */}
-        {!collapsed && (
-          <div className="mx-3 mb-1.5 p-3 rounded-[16px] bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-600 text-white relative overflow-hidden" style={{flexShrink: 0}}>
-            <div className="absolute -top-3 -right-3 w-12 h-12 rounded-full bg-white/10" />
-            <div className="relative">
-              <div className="flex items-center gap-1.5 mb-1">
-                <Crown size={12} className="text-yellow-300" />
-                <span className="text-[10px] font-semibold text-white/90 uppercase tracking-wide">Upgrade to Pro</span>
-              </div>
-              <p className="text-[10px] text-white/70 mb-2 leading-relaxed">
-                Unlimited AI, custom domains & priority support.
-              </p>
-              <button className="w-full py-1.5 rounded-[8px] bg-white text-indigo-600 text-[10px] font-bold hover:bg-indigo-50 transition-colors">
-                Upgrade Now →
-              </button>
-            </div>
-          </div>
-        )}
 
         {/* ── Footer ────────────────────────────────────────────── */}
         <div className="px-3 pb-4 pt-1 space-y-0.5 shrink-0 border-t border-border/40">
