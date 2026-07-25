@@ -69,8 +69,8 @@ export default function PublicVoice({ business, brand, onBack }: Props) {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = 1.0;
       utterance.pitch = 1.0;
-      utterance.onend = () => resolve();
-      utterance.onerror = () => resolve();
+      utterance.onend = (_ev: SpeechSynthesisEvent) => resolve();
+      utterance.onerror = (_ev: SpeechSynthesisErrorEvent) => resolve();
       synthRef.current.speak(utterance);
     });
   }, []);
