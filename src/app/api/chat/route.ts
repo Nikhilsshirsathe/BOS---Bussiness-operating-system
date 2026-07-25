@@ -124,13 +124,13 @@ export async function POST(req: NextRequest) {
     }
 
     // ── Analytics (fire-and-forget) ───────────────────────────────
-    supabase.from("analytics_events").insert({
+    void supabase.from("analytics_events").insert({
       business_id,
       event_type: "chat_message",
       agent_type: result.agent,
       chat_id: chatId,
       visitor_id,
-    }).then(() => {}).catch(() => {});
+    });
 
     return NextResponse.json({
       message: result.response,
